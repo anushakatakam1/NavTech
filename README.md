@@ -1,6 +1,7 @@
 # OrderManagementSystem
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.3.
+This project consists of two modules Login and Orders.Only logged in user can see all the orders,where user can add, view, edit, delete a order.
 
 ## Development server
 
