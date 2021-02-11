@@ -1,0 +1,34 @@
+<div style="height: 100%;">
+    <div class="d-flex justify-content-center mt-5">
+        <div class="card p-3" style="width: 25rem;">
+
+            <h4 class="color d-flex justify-content-center pb-4">Sign In</h4>
+
+            <form [formGroup]="LoginForm">
+                <div class="form-group">
+                    <label for="userName">UserName</label>
+                    <input type="text" formControlName="username" class="form-control" id="userName"
+                        placeholder="Enter User Name">
+                    <small
+                        *ngIf="LoginForm.controls.username.invalid && (LoginForm.controls.username.dirty || LoginForm.controls.username.touched)"
+                        id="userName" class="warn-color form-text text-muted">Please Enter User Name</small>
+                </div>
+                <div class="form-group">
+                    <label for="Password">Password</label>
+                    <input type="password" formControlName="password" class="form-control" id="Password"
+                        placeholder="Password">
+                    <small
+                        *ngIf="LoginForm.controls.password.invalid && (LoginForm.controls.password.dirty || LoginForm.controls.password.touched)"
+                        id="userName" class="warn-color form-text text-muted">Please Enter Password</small>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" formControlName="RememberMe" id="rememberme">
+                    <label class="form-check-label" for="rememberme">Remember me</label>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary" (click)="OnSubmit()">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

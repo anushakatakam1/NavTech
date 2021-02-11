@@ -1,0 +1,110 @@
+<div class="d-flex justify-content-end mr-1 mt-3">
+    <button type="submit" class="btn btn-primary" (click)="AddOrder(ordercreation)">Add Order</button>
+</div>
+
+<!-- To display the list of Orders  -->
+<div class="m-1" style="overflow: auto;">
+    <table id="t01">
+        <tr>
+            <th>Order Number</th>
+            <th>Order Due Date</th>
+            <th>Customer buyer name</th>
+            <th>Customer Address</th>
+            <th>Customer Phone</th>
+            <th>Order Total</th>
+            <th>Action</th>
+        </tr>
+        <tr *ngFor="let order of Orders; let i = index;">
+            <td>{{order?.OrdNo}}</td>
+            <td>{{order?.DDate}} </td>
+            <td>{{order?.CustName}}</td>
+            <td>{{order?.Adrs}}</td>
+            <td>{{order?.PhNo}}</td>
+            <td>{{order?.OrdTotal}}</td>
+            <td><span (click)="EditOrder(ordercreation, order, i)"><i class='fa fa-pen icon-color cursor'></i></span>
+                <span (click)="ConfirmDeleteOrder(content,i)" class="ml-3"><i
+                        class='fa fa-trash icon-color cursor'></i></span>
+
+                <span (click)="ViewOrder(ordercreation,order)" class="ml-3"><i
+                        class='fa fa-eye icon-color cursor'></i></span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+<!-- Template for Creating a New Order -->
+
+<ng-template #ordercreation let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title color" id="modal-basic-title">{{HeaderTitle}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" class="icon-size icon-color">×</span>
+        </button>
+    </div>
+    <div class="p-3">
+        <form [formGroup]="OrderForm">
+            <div class="form-group">
+                <label for="OrdNo">Order Number :</label>
+                <input type="text" formControlName="OrdNo" class="form-control" id="OrdNo">
+            </div>
+            <div class="form-group">
+                <label for="Date">Order Due Date :</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" formControlName="DDate" ngbDatepicker
+                        id="Date" #d="ngbDatepicker" (click)="d.toggle()">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i
+                                class="fa fa-calendar cursor"></i></button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="name">Customer buyer name :</label>
+                <input type="text" formControlName="CustName" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+                <label for="Adrs">Customer Address :</label>
+                <textarea class="form-control" formControlName="Adrs" id="Adrs" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="PhnNo">Customer Phone :</label>
+                <input type="number" formControlName="PhNo" class="form-control" id="PhnNo">
+            </div>
+
+            <div class="form-group">
+                <label for="total">Order Total :</label>
+                <input type="number" formControlName="OrdTotal" class="form-control" id="total">
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="SaveOrder(modal)">Save</button>
+    </div>
+</ng-template>
+
+
+
+
+<!-- Template for Confirmation dialog to delete a order -->
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header p-2">
+        <h4 class="modal-title" id="modal-basic-title"><b>Confirmation</b></h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true" class="icon-size icon-color">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure to delete this Order?</p>
+    </div>
+    <div class="modal-footer d-flex justify-content-between">
+        <button type="button" class="btn btn-outline-dark" (click)="d('cancel')">Cancel</button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Delete</button>
+    </div>
+</ng-template>
