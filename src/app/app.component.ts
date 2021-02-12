@@ -23,8 +23,10 @@ export class AppComponent {
       this.IsLoggedIn = val ? true : false;
       this.UserData = val;
     });
-
-
+  }  
+  
+  Navigate() {
+    this.router.navigate(['orders']);
   }
 
   Logout() {
